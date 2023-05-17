@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PropTypes from "prop-types";
 import Button from './Button';
 
-function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }) {
+function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount }) {
   const aviableTypes = ['тонкое', 'традиционное'];
   const aviableSizes = [26, 30, 40];
   const [activeType, setActiveType] = useState(0);
@@ -23,8 +23,8 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }
       name,
       imageUrl,
       price,
-      size: activeSize,
-      type: activeType,
+      size: aviableSizes[activeSize],
+      type: aviableTypes[activeType],
     }
     onClickAddPizza(obj);
   };
@@ -78,7 +78,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }
           />
         </svg>
         <span>Добавить</span>
-        <i>2</i>
+        <i>{addedCount}</i>
       </Button>
     </div>
   </div>
@@ -92,6 +92,7 @@ PizzaBlock.propTypes = {
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
   onClickAddPiza: PropTypes.func,
+  addedCount: PropTypes.number,
 }
 
 export default PizzaBlock;
